@@ -2,6 +2,7 @@ package com.solarexsoft.recyclerviewnestedrecyclerviewdemo;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,8 @@ import java.util.List;
  * </pre>
  */
 public class SubDataAdapter extends RecyclerView.Adapter<SubViewHolder> {
+    public static final String TAG = "Solarex";
+
     List<ModelData.SubData> mSubData;
 
     public SubDataAdapter() {
@@ -35,12 +38,14 @@ public class SubDataAdapter extends RecyclerView.Adapter<SubViewHolder> {
     public SubViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_view_sub,
                 parent, false);
+        Log.d(TAG, "sub oncreateviewholder");
         return new SubViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull SubViewHolder holder, int position) {
         ModelData.SubData data = mSubData.get(position);
+        Log.d(TAG, "sub onbindviewholder " + position);
         Glide.with(holder.iv_icon.getContext()).load(data.getSubImgUrl()).into(holder.iv_icon);
         holder.tv_content.setText(data.getSubTitle());
     }
